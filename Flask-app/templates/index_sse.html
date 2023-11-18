@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Example</title>
+</head>
+<body>
+    <h1>SSE Example</h1>
+    <ul id="data-list"></ul>
+
+    <script>
+        const eventSource = new EventSource('/stream');
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            console.log('New data received:', data);
+
+            var dataList = document.getElementById('data-list');
+            var listItem = document.createElement('li');
+            listItem.appendChild(document.createTextNode(JSON.stringify(data)));
+            dataList.appendChild(listItem);
+        };
+
+        eventSource.onerror = function(error) {
+            console.error('Error with SSE:', error);
+            eventSource.close();
+        };
+
+        window.onbeforeunload = function() {
+            eventSource.close();
+        };
+    </script>
+</body>
+</html>

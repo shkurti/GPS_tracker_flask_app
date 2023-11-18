@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Updates</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <ul id="update-list"></ul>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('Connected to the server via WebSocket.');
+        });
+
+        socket.on('new_data', function (data) {
+            var ul = document.getElementById('update-list');
+            var li = document.createElement('li');
+            
+            // Access specific fields from the data
+            li.appendChild(document.createTextNode("ID: " + data.ID + ", Date: " + data.DT + ", Device: " + data.D + ", Longitude: " + data.Lng + ", Latitude: " + data.Lat));
+            
+            ul.appendChild(li);
+        });
+    </script>
+</body>
+</html>
