@@ -7,7 +7,7 @@ import time
 app = Flask(__name__)
 
 # Replace the following line with your MongoDB Atlas connection string
-client = MongoClient("mongodb+srv://code7lab:password@cluster0.jlosawe.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://code7lab:XfZOOYjLLN8c4hs2@cluster0.jlosawe.mongodb.net/test?retryWrites=true&w=majority")
 
 # Access the 'test' database using dictionary-style notation
 db = client['test']
